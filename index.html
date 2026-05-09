@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fairbairn Nutrition — Pete · Post-Consultation Notes</title>
+<title>Armour Performance Nutrition — Post-Consultation Notes</title>
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -261,6 +261,21 @@
   }
   .compare-table td.col-flexible { background: #fff; }
   .compare-table tr:last-child td { border-bottom: 0; }
+
+  /* ---- Print / PDF ---- */
+  @media print {
+    html, body { background: #fff; }
+    .kit-stage { padding: 0; gap: 0; align-items: flex-start; }
+    .kit-toolbar { display: none; }
+    .brief-page {
+      display: block !important;   /* show all pages regardless of .visible */
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+    }
+    .brief-page:last-of-type { page-break-after: avoid; break-after: avoid; }
+  }
+  @page { size: A4 portrait; margin: 0; }
 </style>
 </head>
 <body>
@@ -270,7 +285,7 @@
   <!-- Toolbar -->
   <div class="kit-toolbar">
     <span class="kit-toolbar__brand">FAIRBAIRN</span>
-    <span class="kit-toolbar__meta">Consultation Notes · Pete · 08.05.26</span>
+    <span class="kit-toolbar__meta">Consultation Notes · 08.05.26</span>
     <nav class="kit-toolbar__nav">
       <button class="kit-toolbar__btn active" onclick="showPage(0,this)">01 Cover</button>
       <button class="kit-toolbar__btn" onclick="showPage(1,this)">02 Goals</button>
@@ -280,6 +295,7 @@
       <button class="kit-toolbar__btn" onclick="showPage(5,this)">06 Meals</button>
       <button class="kit-toolbar__btn" onclick="showPage(6,this)">07 On the Go</button>
       <button class="kit-toolbar__btn" onclick="showPage(7,this)">08 Next Steps</button>
+      <button class="kit-toolbar__btn" onclick="printAll()" style="margin-left:12px;border-color:rgba(255,255,255,0.6);">Print / PDF</button>
     </nav>
   </div>
 
@@ -291,16 +307,16 @@
       <div class="brief-cover">
         <div class="brief-cover__top">
           <div class="brief-cover__wordmark">
-            FAIRBAIRN
+            ARMOUR
             <span>Performance Nutrition</span>
           </div>
           <div class="brief-cover__ident">
-            Post-Consultation<br>Notes · Pete<br>08.05.26
+            Post-Consultation<br>Notes<br>08.05.26
           </div>
         </div>
 
         <div class="brief-cover__title">
-          <div class="brief-cover__eyebrow">Post-Consultation Notes · Fairbairn Nutrition</div>
+          <div class="brief-cover__eyebrow">Post-Consultation Notes · Armour Performance Nutrition</div>
           <span class="brief-cover__line">POST</span>
           <span class="brief-cover__line">CONSULT&shy;ATION</span>
           <span class="brief-cover__line brief-cover__line--grey">NOTES</span>
@@ -308,8 +324,8 @@
 
         <div class="brief-cover__strip">
           <div class="brief-cover__metric">
-            <div class="brief-cover__metric-label">Client</div>
-            <div class="brief-cover__metric-val">PETE</div>
+            <div class="brief-cover__metric-label">Ref</div>
+            <div class="brief-cover__metric-val" style="font-size:14px;letter-spacing:0.06em;">PCN-08.05.26</div>
           </div>
           <div class="brief-cover__metric">
             <div class="brief-cover__metric-label">Date</div>
@@ -327,7 +343,7 @@
       </div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>01 / 08</span>
     </div>
   </div>
@@ -411,7 +427,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>02 / 08</span>
     </div>
   </div>
@@ -470,7 +486,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>03 / 08</span>
     </div>
   </div>
@@ -553,7 +569,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>04 / 08</span>
     </div>
   </div>
@@ -639,7 +655,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>05 / 08</span>
     </div>
   </div>
@@ -732,7 +748,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>06 / 08</span>
     </div>
   </div>
@@ -815,7 +831,7 @@
       <div class="brief-spacer"></div>
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>07 / 08</span>
     </div>
   </div>
@@ -919,8 +935,7 @@
       <div style="display:flex;justify-content:space-between;align-items:baseline;">
         <div>
           <div class="brief-eyebrow" style="margin-bottom:4px;">Prepared by</div>
-          <div style="font-family:var(--font-display);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:0.02em;">Paul Fairbairn</div>
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey-400);margin-top:4px;">Fairbairn Nutrition · ultraendurancenutrition.com</div>
+          <div style="font-family:var(--font-display);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:0.02em;">Armour Performance Nutrition</div>
         </div>
         <div style="text-align:right;">
           <div class="brief-eyebrow" style="margin-bottom:4px;">Date</div>
@@ -931,7 +946,7 @@
 
     </div>
     <div class="brief-page__pagenum">
-      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>Armour Performance Nutrition</span>
       <span>08 / 08</span>
     </div>
   </div>
@@ -939,6 +954,10 @@
 </div><!-- /kit-stage -->
 
 <script>
+  function printAll() {
+    window.print();
+  }
+
   function showPage(index, btn) {
     // Hide all pages
     document.querySelectorAll('.brief-page').forEach(function(p) {
