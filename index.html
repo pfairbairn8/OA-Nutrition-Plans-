@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fairbairn Nutrition — Pete · Post-Consultation Notes</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #2A2A2A;
+    min-height: 100vh;
+  }
+  .kit-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 24px 80px;
+  }
+  .kit-toolbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #000; color: #fff;
+    display: flex; align-items: center; gap: 18px;
+    padding: 10px 18px;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    width: 100%; max-width: 794px;
+  }
+  .kit-toolbar__brand {
+    font-family: var(--font-display); font-weight: 800;
+    letter-spacing: -0.01em; font-size: 16px;
+  }
+  .kit-toolbar__meta { color: rgba(255,255,255,0.5); }
+  .kit-toolbar__nav { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .kit-toolbar__btn {
+    font-family: var(--font-display); font-weight: 700; font-size: 10px;
+    letter-spacing: 0.1em; padding: 6px 10px; background: transparent;
+    color: #fff; border: 1px solid rgba(255,255,255,0.32); cursor: pointer;
+    text-transform: uppercase;
+  }
+  .kit-toolbar__btn:hover { background: #fff; color: #000; }
+  .kit-toolbar__btn.active { background: #fff; color: #000; border-color: #fff; }
+
+  /* Page wrapper — A4 portrait at 96dpi */
+  .brief-page {
+    position: relative;
+    width: 794px; height: 1123px;
+    background: var(--paper);
+    color: var(--fg-primary);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    overflow: hidden;
+    display: none;
+  }
+  .brief-page.visible { display: block; }
+  .brief-page--dark { background: #000; color: #fff; }
+  .brief-page__inner {
+    padding: 56px 56px 84px;
+    height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .brief-page__inner--bleed { padding: 0; }
+  .brief-page__pagenum {
+    position: absolute; left: 56px; right: 56px; bottom: 28px;
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--grey-300);
+  }
+  .brief-page--dark .brief-page__pagenum { color: rgba(255,255,255,0.4); }
+
+  /* Cover */
+  .brief-cover {
+    position: relative; width: 100%; height: 100%;
+    background: #000 url("assets/cover-texture.png") center/cover no-repeat;
+    color: #fff;
+    padding: 48px 56px;
+    display: flex; flex-direction: column;
+  }
+  .brief-cover__top {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .brief-cover__wordmark {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 20px; letter-spacing: 0.02em; text-transform: uppercase;
+    color: #fff;
+  }
+  .brief-cover__wordmark span {
+    font-weight: 400; font-size: 13px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5); display: block; margin-top: 2px;
+  }
+  .brief-cover__ident {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-align: right;
+  }
+  .brief-cover__title { margin-top: auto; margin-bottom: 48px; }
+  .brief-cover__eyebrow {
+    font-family: var(--font-body); font-weight: 600; font-size: 11px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-bottom: 18px;
+  }
+  .brief-cover__line {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 104px; line-height: 0.90; letter-spacing: -0.015em;
+    text-transform: uppercase; display: block;
+  }
+  .brief-cover__line--grey { color: var(--grey-400); }
+  .brief-cover__strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 24px;
+  }
+  .brief-cover__metric {
+    padding: 0 16px;
+    border-left: 1px solid rgba(255,255,255,0.12);
+  }
+  .brief-cover__metric:first-child { border-left: 0; padding-left: 0; }
+  .brief-cover__metric-label {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-bottom: 10px;
+  }
+  .brief-cover__metric-num {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 32px; line-height: 1; letter-spacing: -0.01em;
+  }
+  .brief-cover__metric-unit {
+    font-family: var(--font-display); font-weight: 600; font-size: 12px;
+    color: rgba(255,255,255,0.55); margin-left: 6px; text-transform: uppercase;
+  }
+  .brief-cover__metric-val {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 22px; line-height: 1; letter-spacing: -0.01em;
+  }
+
+  /* Spectrum bar for dietary flexibility */
+  .spectrum-bar {
+    height: 8px; background: linear-gradient(to right, #000 0%, #9A9A9A 50%, #ECECEC 100%);
+    margin: 16px 0 8px;
+  }
+  .spectrum-labels {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--grey-500);
+  }
+
+  /* Numbered list */
+  .brief-numbered {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .brief-numbered li {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .brief-numbered__num {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--grey-400); min-width: 24px; padding-top: 2px;
+  }
+  .brief-numbered__text {
+    font-size: 13px; line-height: 1.55; color: #000;
+  }
+
+  /* Plan card (Go plan A/B/C) */
+  .plan-card {
+    border: 1px solid var(--rule); padding: 16px 18px;
+  }
+  .plan-card__label {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 32px; letter-spacing: -0.01em; text-transform: uppercase;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .plan-card__name {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--grey-400); margin-bottom: 12px;
+  }
+  .plan-card__items {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .plan-card__item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 12px; line-height: 1.4; color: #000;
+  }
+  .plan-card__item::before {
+    content: "→"; font-family: var(--font-body);
+    color: var(--grey-400); flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* Meal grid card */
+  .meal-card {
+    background: var(--grey-100);
+    border-left: 2px solid #000;
+    padding: 14px 16px;
+  }
+  .meal-card__title {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 8px;
+  }
+  .meal-card__items {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .meal-card__item {
+    font-size: 11px; line-height: 1.4; color: #000;
+    display: flex; gap: 6px; align-items: flex-start;
+  }
+  .meal-card__item::before {
+    content: "·"; color: var(--grey-400); flex-shrink: 0;
+  }
+
+  /* Framework table */
+  .fw-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 20px;
+  }
+  .fw-table th {
+    background: #000; color: #fff;
+    padding: 9px 12px;
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em; text-align: left;
+  }
+  .fw-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 12px; line-height: 1.5; vertical-align: top;
+  }
+  .fw-table tr:last-child td { border-bottom: 0; }
+  .fw-table__category {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.04em; width: 120px;
+  }
+  .fw-table__options { color: var(--grey-500); }
+
+  /* Compare table (rigid vs flexible) */
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 16px;
+  }
+  .compare-table th {
+    padding: 10px 14px;
+    font-family: var(--font-display); font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.04em; text-align: left;
+    border-bottom: 2px solid #000;
+  }
+  .compare-table th.col-rigid { background: #000; color: #fff; }
+  .compare-table th.col-flexible { background: var(--grey-100); color: #000; }
+  .compare-table td {
+    padding: 10px 14px; vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+    font-size: 12px; line-height: 1.5;
+  }
+  .compare-table td.col-rigid {
+    background: #F5F5F4; color: #000;
+    border-right: 1px solid var(--rule);
+  }
+  .compare-table td.col-flexible { background: #fff; }
+  .compare-table tr:last-child td { border-bottom: 0; }
+</style>
+</head>
+<body>
+
+<div class="kit-stage">
+
+  <!-- Toolbar -->
+  <div class="kit-toolbar">
+    <span class="kit-toolbar__brand">FAIRBAIRN</span>
+    <span class="kit-toolbar__meta">Consultation Notes · Pete · 08.05.26</span>
+    <nav class="kit-toolbar__nav">
+      <button class="kit-toolbar__btn active" onclick="showPage(0,this)">01 Cover</button>
+      <button class="kit-toolbar__btn" onclick="showPage(1,this)">02 Goals</button>
+      <button class="kit-toolbar__btn" onclick="showPage(2,this)">03 Actions I</button>
+      <button class="kit-toolbar__btn" onclick="showPage(3,this)">04 Actions II</button>
+      <button class="kit-toolbar__btn" onclick="showPage(4,this)">05 Flexibility</button>
+      <button class="kit-toolbar__btn" onclick="showPage(5,this)">06 Meals</button>
+      <button class="kit-toolbar__btn" onclick="showPage(6,this)">07 On the Go</button>
+      <button class="kit-toolbar__btn" onclick="showPage(7,this)">08 Next Steps</button>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       PAGE 1 — COVER
+  ============================================================ -->
+  <div class="brief-page brief-page--dark visible" id="page-0">
+    <div class="brief-page__inner brief-page__inner--bleed">
+      <div class="brief-cover">
+        <div class="brief-cover__top">
+          <div class="brief-cover__wordmark">
+            FAIRBAIRN
+            <span>Performance Nutrition</span>
+          </div>
+          <div class="brief-cover__ident">
+            Post-Consultation<br>Notes · Pete<br>08.05.26
+          </div>
+        </div>
+
+        <div class="brief-cover__title">
+          <div class="brief-cover__eyebrow">Post-Consultation Notes · Fairbairn Nutrition</div>
+          <span class="brief-cover__line">POST</span>
+          <span class="brief-cover__line">CONSULT&shy;ATION</span>
+          <span class="brief-cover__line brief-cover__line--grey">NOTES</span>
+        </div>
+
+        <div class="brief-cover__strip">
+          <div class="brief-cover__metric">
+            <div class="brief-cover__metric-label">Client</div>
+            <div class="brief-cover__metric-val">PETE</div>
+          </div>
+          <div class="brief-cover__metric">
+            <div class="brief-cover__metric-label">Date</div>
+            <div class="brief-cover__metric-val">08.05.26</div>
+          </div>
+          <div class="brief-cover__metric">
+            <div class="brief-cover__metric-label">Eating Window</div>
+            <div class="brief-cover__metric-val" style="font-size:17px;">13:00–20:00</div>
+          </div>
+          <div class="brief-cover__metric">
+            <div class="brief-cover__metric-label">Protein Target</div>
+            <div class="brief-cover__metric-num">30–40<span class="brief-cover__metric-unit">g/meal</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>01 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 2 — CONTEXT & GOALS
+  ============================================================ -->
+  <div class="brief-page" id="page-1">
+    <div class="brief-page__inner">
+
+      <div class="brief-eyebrow">Client Overview</div>
+      <h1 class="brief-h1">CONTEXT<br>&amp; GOALS</h1>
+      <hr class="brief-rule--strong" style="margin-bottom:20px;">
+
+      <div class="brief-grid-2" style="margin-bottom:20px;">
+        <div>
+          <div class="brief-eyebrow">Situation</div>
+          <ul class="brief-numbered" style="margin-top:6px;">
+            <li>
+              <span class="brief-numbered__num">01</span>
+              <span class="brief-numbered__text">Back injury — progressively worsening, limits training capacity.</span>
+            </li>
+            <li>
+              <span class="brief-numbered__num">02</span>
+              <span class="brief-numbered__text">Work is physically demanding and unpredictable — driving days with subsidy available.</span>
+            </li>
+            <li>
+              <span class="brief-numbered__num">03</span>
+              <span class="brief-numbered__text">History of weight cutting and all-or-nothing eating — current intake well under 1,000kcal on most days.</span>
+            </li>
+            <li>
+              <span class="brief-numbered__num">04</span>
+              <span class="brief-numbered__text">Current pattern: salami, cheese, breadsticks, and a protein shake. Restriction driving later overeating.</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="brief-eyebrow">Bottom Line</div>
+          <p class="brief-body" style="margin-top:6px;">Two proper meals. Every day. Everything else builds from there.</p>
+          <div style="height:16px;"></div>
+          <div class="brief-eyebrow">Eating Window</div>
+          <p class="brief-body" style="margin-top:6px;font-weight:600;">13:00 → 18:00–20:00</p>
+          <div style="height:16px;"></div>
+          <div class="brief-eyebrow">Focus</div>
+          <p class="brief-body" style="margin-top:6px;">Build consistent, nourishing habits that support weight loss without repeating the restriction-and-rebound cycle.</p>
+        </div>
+      </div>
+
+      <!-- Goals section bar -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">01</span>
+          <span class="brief-section__title">Your Goals</span>
+        </div>
+      </div>
+
+      <ul class="brief-numbered" style="margin-bottom:20px;">
+        <li>
+          <span class="brief-numbered__num">A</span>
+          <span class="brief-numbered__text">Lose weight to take pressure off the back and support recovery.</span>
+        </li>
+        <li>
+          <span class="brief-numbered__num">B</span>
+          <span class="brief-numbered__text">Start boxing again once back and weight allow.</span>
+        </li>
+        <li>
+          <span class="brief-numbered__num">C</span>
+          <span class="brief-numbered__text">Build a more consistent, less chaotic relationship with food.</span>
+        </li>
+      </ul>
+
+      <div class="brief-highlight">
+        <div class="brief-highlight__label">Priority · Eating Window</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num" style="font-size:42px;">13:00</span>
+          <span class="brief-highlight__unit">→ 20:00</span>
+        </div>
+        <p class="brief-highlight__body">Two main meals within the window. One or two snacks. Structure reduces decision-making in the moment — and removes the conditions that drive unplanned eating.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>02 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 3 — KEY ACTIONS I (01 & 02)
+  ============================================================ -->
+  <div class="brief-page" id="page-2">
+    <div class="brief-page__inner">
+
+      <div class="brief-eyebrow">Key Actions</div>
+      <h1 class="brief-h1" style="font-size:44px;margin-bottom:14px;">WHAT<br>CHANGES NOW</h1>
+      <hr class="brief-rule--strong" style="margin-bottom:20px;">
+
+      <!-- Action 01 -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">01</span>
+          <span class="brief-section__title">Build Two Main Meals</span>
+          <span class="brief-section__sub">Within eating window</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:12px;">The most important change. Current intake is well under 1,000kcal on most days — that level of restriction makes hunger and overeating later almost inevitable and does not support training.</p>
+      <p class="brief-body" style="margin-bottom:16px;">Two main meals in the eating window, plus one or two snacks. Each meal needs a proper protein source, a carbohydrate, and vegetables. Frame it as <em>"how much nutrition can I get"</em> — not how low can I go.</p>
+
+      <div class="brief-highlight" style="margin-bottom:16px;">
+        <div class="brief-highlight__label">Protein Target · Per Main Meal</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num">30–40</span>
+          <span class="brief-highlight__unit">g protein</span>
+        </div>
+        <p class="brief-highlight__body">Chicken: 150–200g cooked. Scrambled eggs on toast: 3 eggs (~20g) + tin of beans = ~30g with good fibre. No need to count — just include a proper source.</p>
+      </div>
+
+      <!-- Action 02 -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">02</span>
+          <span class="brief-section__title">Switch Your Soups</span>
+          <span class="brief-section__sub">350–400kcal target</span>
+        </div>
+      </div>
+
+      <div class="brief-grid-2" style="margin-bottom:0;">
+        <div class="brief-panel">
+          <div class="brief-panel__title">What to look for</div>
+          <p class="brief-panel__body">350–400kcal. High protein and fibre. Chicken and vegetable or lentil-based. Baxters, New Covent Garden, Tesco Finest, M&amp;S all have strong options.</p>
+        </div>
+        <div class="brief-panel">
+          <div class="brief-panel__title">How to use them</div>
+          <p class="brief-panel__body">Works in a flask on driving days. Pair with a bread roll — now it is a proper meal, not a placeholder. The very-low-calorie soups are not doing the job.</p>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>03 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 4 — KEY ACTIONS II (03 & 04)
+  ============================================================ -->
+  <div class="brief-page" id="page-3">
+    <div class="brief-page__inner">
+
+      <!-- Action 03 -->
+      <div class="brief-section" style="margin-top:0;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">03</span>
+          <span class="brief-section__title">Protein Shake</span>
+          <span class="brief-section__sub">Snack — not a meal</span>
+        </div>
+      </div>
+
+      <div class="brief-grid-2" style="margin-bottom:20px;">
+        <div>
+          <div class="brief-eyebrow">Keep it at 17:30</div>
+          <p class="brief-body" style="margin-top:6px;">The protein shake works well as a snack between meals. Keep it where it is. Do not use it as a meal replacement.</p>
+          <div style="height:12px;"></div>
+          <div class="brief-eyebrow">Pair it</div>
+          <p class="brief-body" style="margin-top:6px;">Add a piece of fruit or a couple of rice cakes. Carbohydrate alongside the protein makes it more satisfying.</p>
+        </div>
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Pop Chips &amp; Diet Coke</div>
+          <p class="brief-panel__body">These tools can help manage cravings — that is not a problem. They work better as add-ons when the main meals are already solid, rather than as the primary strategy.</p>
+        </div>
+      </div>
+
+      <!-- Action 04 -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">04</span>
+          <span class="brief-section__title">Structured Diet Breaks</span>
+          <span class="brief-section__sub">Every 3 weeks</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:16px;">Regular breaks from a deficit rather than running one continuously. Three weeks of consistent dieting, then a minimum of three days at maintenance. This gives a psychological reset and helps re-establish appetite before the next block.</p>
+
+      <table class="brief-table" style="margin-bottom:18px;">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Duration</th>
+            <th>Approach</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="brief-table__action" style="font-weight:600;">Deficit block</td>
+            <td class="brief-table__action">~3 weeks</td>
+            <td class="brief-table__action">Consistent eating as outlined. Track start date.</td>
+          </tr>
+          <tr>
+            <td class="brief-table__action" style="font-weight:600;">Maintenance break</td>
+            <td class="brief-table__action">3+ days</td>
+            <td class="brief-table__action">Same foods — slightly larger portions or add breakfast back. Not a free-for-all.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="brief-panel" style="margin-bottom:18px;">
+        <div class="brief-panel__title">Building the skill</div>
+        <p class="brief-panel__body">Given a history of weight cycling through restriction and gain, practising eating at maintenance with solid habits already in place is genuinely useful. Think of it as building a skill — not a reward. You decide when to take the break. Keep a note of when you start each block.</p>
+      </div>
+
+      <div class="brief-highlight">
+        <div class="brief-highlight__label">Target Cycle</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num" style="font-size:42px;">3</span>
+          <span class="brief-highlight__unit">weeks on → 3 days min off</span>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>04 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 5 — DIETARY FLEXIBILITY
+  ============================================================ -->
+  <div class="brief-page" id="page-4">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-top:0;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">05</span>
+          <span class="brief-section__title">Dietary Flexibility</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:16px;">People sit somewhere along a spectrum in how they approach food — from more rigid to more flexible. This is not a fixed category and can shift over time depending on situation, environment, and emotional state.</p>
+
+      <div class="spectrum-bar"></div>
+      <div class="spectrum-labels">
+        <span>Rigid</span>
+        <span>Balanced</span>
+        <span>Flexible</span>
+      </div>
+
+      <div style="height:18px;"></div>
+
+      <table class="compare-table" style="margin-bottom:18px;">
+        <thead>
+          <tr>
+            <th class="col-rigid">Rigid Dietary Restraint</th>
+            <th class="col-flexible">Flexible Dietary Restraint</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-rigid">All-or-nothing approach</td>
+            <td class="col-flexible">Moderate, consistent approach</td>
+          </tr>
+          <tr>
+            <td class="col-rigid">Eliminates 'forbidden' foods, narrowing variety</td>
+            <td class="col-flexible">Focus on choices — not rules</td>
+          </tr>
+          <tr>
+            <td class="col-rigid">One 'cheat' triggers further overeating — the day is already written off</td>
+            <td class="col-flexible">No foods entirely off limits — think frequency, portion, context</td>
+          </tr>
+          <tr>
+            <td class="col-rigid">Linked to increased impulsiveness and setbacks</td>
+            <td class="col-flexible">More likely to reach long-term goals</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Language section -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">→</span>
+          <span class="brief-section__title">Shifting the Language</span>
+        </div>
+      </div>
+
+      <div class="brief-grid-2" style="margin-bottom:16px;">
+        <div class="brief-panel">
+          <div class="brief-panel__title">Move away from</div>
+          <p class="brief-panel__body">"Cheating." "Cheat days." The cheat-and-diet cycle is exactly the pattern that keeps people stuck. Catch yourself when you use this framing.</p>
+        </div>
+        <div class="brief-panel">
+          <div class="brief-panel__title">Think instead</div>
+          <p class="brief-panel__body">Frequency. Portion. Context. The odd fish and chips from the chippy does not derail anything when the week as a whole is consistent.</p>
+        </div>
+      </div>
+
+      <div class="brief-highlight">
+        <div class="brief-highlight__label">Key Principle</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num" style="font-size:38px;line-height:1;">NO FOODS</span>
+        </div>
+        <p class="brief-highlight__body">No foods should be entirely off limits. Instead: how often, how much, and in what context. After one unplanned choice — continue with the next planned meal as normal. Do not compensate by restricting. Keep overall consistency intact.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>05 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 6 — SIMPLE MEALS
+  ============================================================ -->
+  <div class="brief-page" id="page-5">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-top:0;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">06</span>
+          <span class="brief-section__title">Simple Meals</span>
+          <span class="brief-section__sub">Plug-and-play framework</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:14px;">Healthy eating does not need complex recipes or long prep times. Put together four components. That is the whole system.</p>
+
+      <table class="fw-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="fw-table__category">Protein</td>
+            <td class="fw-table__options">Chicken, fish, eggs, mince, Quorn, prawns, tinned tuna/salmon, lean beef mince (5%)</td>
+          </tr>
+          <tr>
+            <td class="fw-table__category">Carbohydrate</td>
+            <td class="fw-table__options">Rice, pasta, potatoes, wraps, bread, noodles</td>
+          </tr>
+          <tr>
+            <td class="fw-table__category">Vegetables</td>
+            <td class="fw-table__options">Fresh, frozen, or pre-prepped. Frozen counts fully. A portion = a handful or small tin.</td>
+          </tr>
+          <tr>
+            <td class="fw-table__category">Flavour</td>
+            <td class="fw-table__options">Sauce, seasoning, spices, dressing — jarred is fine.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="brief-grid-2" style="margin-bottom:14px;">
+        <div class="meal-card">
+          <div class="meal-card__title">Chinese / Stir-Fry</div>
+          <ul class="meal-card__items">
+            <li class="meal-card__item">Stir-fry veg bag</li>
+            <li class="meal-card__item">Rice or noodles</li>
+            <li class="meal-card__item">Chicken (batch-cooked ahead)</li>
+            <li class="meal-card__item">Packet stir-fry sauce</li>
+          </ul>
+        </div>
+        <div class="meal-card">
+          <div class="meal-card__title">Italian / Pasta</div>
+          <ul class="meal-card__items">
+            <li class="meal-card__item">Pasta or Pasta n Sauce as a base</li>
+            <li class="meal-card__item">150–200g cooked chicken or meatballs</li>
+            <li class="meal-card__item">Jarred tomato sauce</li>
+            <li class="meal-card__item">Handful of frozen spinach stirred through</li>
+          </ul>
+        </div>
+        <div class="meal-card">
+          <div class="meal-card__title">Jacket Potato</div>
+          <ul class="meal-card__items">
+            <li class="meal-card__item">Microwaveable jacket (10–12 min)</li>
+            <li class="meal-card__item">Tin of beans, leftover chicken, or tuna</li>
+            <li class="meal-card__item">Salad or pre-prepped veg on the side</li>
+          </ul>
+        </div>
+        <div class="meal-card">
+          <div class="meal-card__title">Scrambled Eggs</div>
+          <ul class="meal-card__items">
+            <li class="meal-card__item">2–3 eggs scrambled</li>
+            <li class="meal-card__item">2 slices of toast</li>
+            <li class="meal-card__item">Tin of beans on the side (~30g protein total)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:0;">
+        <div class="brief-panel__title">Cook once, eat twice</div>
+        <p class="brief-panel__body">Cook a batch of chicken or mince in the evening and portion half for the next day before you eat. Same amount of cooking. Two meals out of it. 5 portions of fruit and veg per day — not 5 of fruit. Frozen counts. A portion is a handful or small tin.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>06 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 7 — EATING ON THE GO
+  ============================================================ -->
+  <div class="brief-page" id="page-6">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-top:0;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">07</span>
+          <span class="brief-section__title">Eating on the Go</span>
+          <span class="brief-section__sub">Driving days · Plan A / B / C</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:16px;">On driving days, decisions become reactive when you are already hungry. Pick a plan before you set off — not when food is in front of you. A subsidy is available: the budget is there to eat well.</p>
+
+      <div class="brief-grid-3" style="margin-bottom:18px;">
+
+        <div class="plan-card">
+          <div class="plan-card__label">A</div>
+          <div class="plan-card__name">Supermarket or Coolbox</div>
+          <ul class="plan-card__items">
+            <li class="plan-card__item">Pre-made soup (350–400kcal, chicken or lentil) — works in a flask from home</li>
+            <li class="plan-card__item">High-protein salad pot or meal deal with protein filling</li>
+            <li class="plan-card__item">Cooked chicken slices or Skyr / Greek yogurt</li>
+            <li class="plan-card__item">Banana or apple</li>
+            <li class="plan-card__item">Popcorn or baked crisps as savoury snack</li>
+          </ul>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__label">B</div>
+          <div class="plan-card__name">M&amp;S Stop</div>
+          <ul class="plan-card__items">
+            <li class="plan-card__item">High-protein salad pot or large salad</li>
+            <li class="plan-card__item">Cooked or marinated chicken to add protein</li>
+            <li class="plan-card__item">Piece of fruit</li>
+            <li class="plan-card__item">Popcorn or baked crisps</li>
+          </ul>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__label">C</div>
+          <div class="plan-card__name">Fast Food</div>
+          <ul class="plan-card__items">
+            <li class="plan-card__item">Grilled chicken wrap (sweet chilli, tikka, or BBQ)</li>
+            <li class="plan-card__item">Medium fries or carrot sticks</li>
+            <li class="plan-card__item">Apple slices</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="brief-highlight" style="margin-bottom:0;">
+        <div class="brief-highlight__label">Quick Check · Before You Set Off</div>
+        <div class="brief-highlight__value" style="margin-bottom:10px;">
+          <span class="brief-highlight__num" style="font-size:38px;">3</span>
+          <span class="brief-highlight__unit">questions</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.85);">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.5);min-width:24px;">01</span>
+            Which plan am I using today — A, B, or C?
+          </li>
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.85);">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.5);min-width:24px;">02</span>
+            What will I have for the main, snack, and drink?
+          </li>
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.85);">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.5);min-width:24px;">03</span>
+            Decide this before food is in front of you.
+          </li>
+        </ul>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>07 / 08</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE 8 — NEXT STEPS & SIGN-OFF
+  ============================================================ -->
+  <div class="brief-page" id="page-7">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-top:0;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">08</span>
+          <span class="brief-section__title">Leaner Protein Options</span>
+        </div>
+      </div>
+
+      <div class="brief-grid-2" style="margin-bottom:20px;">
+        <table class="brief-table" style="margin-bottom:0;">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Chicken breast / turkey mince</td>
+              <td class="brief-table__action">Versatile — batch-cook ahead</td>
+            </tr>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Cod / haddock</td>
+              <td class="brief-table__action">15–20 min, oven or pan</td>
+            </tr>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Tinned tuna / salmon</td>
+              <td class="brief-table__action">No prep. Jacket potato / salad</td>
+            </tr>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Eggs</td>
+              <td class="brief-table__action">~6–7g per egg. Fast first meal</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="brief-table" style="margin-bottom:0;">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Lean beef mince (5%)</td>
+              <td class="brief-table__action">Bolognese, chilli, tacos</td>
+            </tr>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Prawns</td>
+              <td class="brief-table__action">Stir-fry or salad. Ready quickly</td>
+            </tr>
+            <tr>
+              <td class="brief-table__action" style="font-weight:600;">Quorn mince / fillets</td>
+              <td class="brief-table__action">Plant-based swap — works in most dishes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Steps section bar -->
+      <div class="brief-section">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">→</span>
+          <span class="brief-section__title">Next Steps</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="margin-bottom:16px;">Before the next check-in, the priority is getting two main meals consistently in place within the eating window. Everything else builds from there.</p>
+
+      <ul class="brief-numbered" style="margin-bottom:20px;">
+        <li>
+          <span class="brief-numbered__num">01</span>
+          <span class="brief-numbered__text">Build two main meals within the 13:00–20:00 window. Protein + carb + veg in each.</span>
+        </li>
+        <li>
+          <span class="brief-numbered__num">02</span>
+          <span class="brief-numbered__text">Switch to filling soups (350–400kcal, chicken or lentil-based). Pair with a roll.</span>
+        </li>
+        <li>
+          <span class="brief-numbered__num">03</span>
+          <span class="brief-numbered__text">Keep the protein shake at 17:30 as a snack — add fruit or rice cakes alongside.</span>
+        </li>
+        <li>
+          <span class="brief-numbered__num">04</span>
+          <span class="brief-numbered__text">Note the start date of the first 3-week deficit block. Plan a maintenance break at the end of it.</span>
+        </li>
+      </ul>
+
+      <div class="brief-spacer"></div>
+      <hr class="brief-rule" style="margin-bottom:14px;">
+
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <div>
+          <div class="brief-eyebrow" style="margin-bottom:4px;">Prepared by</div>
+          <div style="font-family:var(--font-display);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:0.02em;">Paul Fairbairn</div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey-400);margin-top:4px;">Fairbairn Nutrition · ultraendurancenutrition.com</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="brief-eyebrow" style="margin-bottom:4px;">Date</div>
+          <div style="font-family:var(--font-mono);font-size:13px;letter-spacing:0.12em;font-weight:600;">08.05.26</div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey-400);margin-top:4px;">If you have any questions, get in touch.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Fairbairn Nutrition · ultraendurancenutrition.com</span>
+      <span>08 / 08</span>
+    </div>
+  </div>
+
+</div><!-- /kit-stage -->
+
+<script>
+  function showPage(index, btn) {
+    // Hide all pages
+    document.querySelectorAll('.brief-page').forEach(function(p) {
+      p.classList.remove('visible');
+    });
+    // Show target
+    document.getElementById('page-' + index).classList.add('visible');
+    // Update buttons
+    document.querySelectorAll('.kit-toolbar__btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+/* UI Kit — Brief Document styles. Inherits tokens from /colors_and_type.css */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #2A2A2A; min-height: 100vh; font-family: var(--font-body); }
+
+.kit-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 24px 80px;
+}
+
+.kit-toolbar {
+  position: sticky; top: 0; z-index: 50;
+  background: #000; color: #fff;
+  display: flex; align-items: center; gap: 18px;
+  padding: 10px 18px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  width: 100%; max-width: 794px;
+}
+.kit-toolbar__brand { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em; font-size: 16px; }
+.kit-toolbar__nav { margin-left: auto; display: flex; gap: 6px; }
+.kit-toolbar__btn {
+  font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.12em;
+  padding: 7px 12px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.32); cursor: pointer;
+}
+.kit-toolbar__btn:hover { background: #fff; color: #000; }
+.kit-toolbar__btn[aria-pressed="true"] { background: #fff; color: #000; border-color: #fff; }
+
+/* ---------- Page wrapper (A4 portrait, scaled) ---------- */
+.brief-page {
+  position: relative;
+  width: 794px;          /* A4 @ 96dpi */
+  height: 1123px;
+  background: var(--paper);
+  color: var(--fg-primary);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.brief-page--dark { background: #000; color: #fff; }
+.brief-page__inner {
+  padding: 56px 56px 84px;
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.brief-page__inner--bleed { padding: 0 0 0 0; }
+.brief-page__pagenum {
+  position: absolute; left: 56px; right: 56px; bottom: 28px;
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--grey-300);
+}
+.brief-page--dark .brief-page__pagenum { color: rgba(255,255,255,0.4); }
+
+/* ---------- Cover ---------- */
+.brief-cover {
+  position: relative; width: 100%; height: 100%;
+  background: #000 url("../../assets/cover-texture.png") center/cover no-repeat;
+  color: #fff;
+  padding: 48px 56px;
+  display: flex; flex-direction: column;
+}
+.brief-cover__top { display: flex; justify-content: space-between; align-items: center; }
+.brief-cover__logo { height: 40px; filter: invert(1); }
+.brief-cover__ident {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+.brief-cover__title { margin-top: auto; margin-bottom: 56px; }
+.brief-cover__eyebrow {
+  font-family: var(--font-body); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.62);
+  margin-bottom: 18px;
+}
+.brief-cover__line {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 112px; line-height: 0.92; letter-spacing: -0.015em; text-transform: uppercase;
+}
+.brief-cover__line--grey { color: var(--grey-300); }
+.brief-cover__strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 24px;
+}
+.brief-cover__metric { padding: 0 16px; border-left: 1px solid rgba(255,255,255,0.12); }
+.brief-cover__metric:first-child { border-left: 0; padding-left: 0; }
+.brief-cover__metric-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62); margin-bottom: 10px;
+}
+.brief-cover__metric-num {
+  font-family: var(--font-display); font-weight: 900; font-size: 40px; line-height: 1; letter-spacing: -0.01em;
+}
+.brief-cover__metric-unit {
+  font-family: var(--font-display); font-weight: 600; font-size: 13px;
+  color: rgba(255,255,255,0.62); margin-left: 6px; text-transform: uppercase;
+}
+
+/* ---------- Section header ---------- */
+.brief-section { margin: 0 0 24px; }
+.brief-section__rule { height: 8px; background: #000; }
+.brief-section__bar {
+  background: #000; color: #fff;
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 20px;
+}
+.brief-section__num {
+  font-family: var(--font-mono); font-weight: 500; font-size: 12px;
+  letter-spacing: 0.22em; color: rgba(255,255,255,0.6);
+}
+.brief-section__title {
+  font-family: var(--font-display); font-weight: 800; font-size: 22px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.brief-section__sub {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ---------- Highlight box ---------- */
+.brief-highlight {
+  background: #000; color: #fff;
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 24px;
+}
+.brief-highlight__label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+.brief-highlight__value { display: flex; align-items: baseline; gap: 12px; }
+.brief-highlight__num {
+  font-family: var(--font-display); font-weight: 900; font-size: 56px;
+  line-height: 1; letter-spacing: -0.015em; text-transform: uppercase;
+}
+.brief-highlight__unit {
+  font-family: var(--font-display); font-weight: 600; font-size: 16px;
+  color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.brief-highlight__body {
+  font-size: 13px; line-height: 1.5; max-width: 60ch;
+  color: rgba(255,255,255,0.85); margin-top: 6px;
+}
+
+/* ---------- Grey panel ---------- */
+.brief-panel {
+  background: var(--grey-100);
+  border-left: 2px solid #000;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+.brief-panel__title {
+  font-family: var(--font-display); font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.brief-panel__body { font-size: 13px; line-height: 1.55; color: #000; }
+
+/* ---------- Table ---------- */
+.brief-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px; margin-bottom: 24px;
+}
+.brief-table th {
+  text-align: left; background: #000; color: #fff;
+  padding: 9px 12px;
+  font-family: var(--font-display); font-weight: 700; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.brief-table th.brief-table__num-col { text-align: right; }
+.brief-table td {
+  padding: 11px 12px; border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+.brief-table tr:last-child td { border-bottom: 0; }
+.brief-table__time {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  width: 80px; color: #000; font-weight: 500;
+}
+.brief-table__action { font-size: 13px; }
+.brief-table__num {
+  font-family: var(--font-display); font-weight: 700; font-size: 16px;
+  text-align: right; width: 80px; letter-spacing: -0.01em;
+}
+
+/* ---------- Body strip (in-document) ---------- */
+.brief-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+.brief-strip--dark { background: #000; color: #fff; }
+.brief-strip--light { background: var(--grey-100); color: #000; }
+.brief-strip__metric { padding: 0 16px; }
+.brief-strip__metric + .brief-strip__metric { border-left: 1px solid rgba(255,255,255,0.12); }
+.brief-strip--light .brief-strip__metric + .brief-strip__metric { border-left: 1px solid var(--rule); }
+.brief-strip__label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 8px; opacity: 0.62;
+}
+.brief-strip__num {
+  font-family: var(--font-display); font-weight: 900; font-size: 32px; line-height: 1; letter-spacing: -0.01em;
+}
+.brief-strip__unit {
+  font-family: var(--font-display); font-weight: 600; font-size: 12px;
+  margin-left: 4px; text-transform: uppercase; opacity: 0.62;
+}
+
+/* ---------- Product tile ---------- */
+.brief-product {
+  background: #fff; border: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+}
+.brief-product__img {
+  height: 110px; display: flex; align-items: center; justify-content: center;
+  background: repeating-linear-gradient(45deg, #F5F5F4 0 10px, #ECECEC 10px 20px);
+  padding: 8px; position: relative;
+}
+.brief-product__img::after {
+  content: "IMG"; position: absolute;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em;
+  color: var(--grey-400);
+}
+.brief-product__img img { display: none; }
+.brief-product__meta { padding: 8px 12px; border-top: 1px solid var(--rule); }
+.brief-product__name {
+  font-family: var(--font-display); font-weight: 700; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.15;
+}
+.brief-product__stat {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  color: var(--grey-400); text-transform: uppercase; margin-top: 4px;
+}
+
+/* ---------- Misc body utilities ---------- */
+.brief-eyebrow {
+  font-family: var(--font-body); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey-500);
+  margin-bottom: 8px;
+}
+.brief-h1 {
+  font-family: var(--font-display); font-weight: 900; font-size: 56px;
+  line-height: 0.95; letter-spacing: -0.015em; text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.brief-h2 {
+  font-family: var(--font-display); font-weight: 800; font-size: 28px;
+  line-height: 1; letter-spacing: -0.005em; text-transform: uppercase;
+  margin: 8px 0 12px;
+}
+.brief-body { font-size: 13px; line-height: 1.55; color: #000; max-width: 62ch; }
+.brief-body + .brief-body { margin-top: 10px; }
+
+.brief-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px; }
+.brief-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.brief-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+
+.brief-rule { border: 0; border-top: 1px solid var(--rule); margin: 18px 0; }
+.brief-rule--strong { border: 0; border-top: 2px solid #000; margin: 18px 0; }
+
+.brief-spacer { flex: 1; }
