@@ -72,7 +72,7 @@ html, body { background: #2A2A2A; font-family: var(--font-body); }
 }
 .brief-cover__line {
   font-family: var(--font-display); font-weight: 900;
-  font-size: 96px; line-height: 0.92; letter-spacing: -0.015em; text-transform: uppercase;
+  font-size: 78px; line-height: 0.92; letter-spacing: -0.015em; text-transform: uppercase;
 }
 .brief-cover__line--grey { color: rgba(255,255,255,0.35); }
 .brief-cover__strip {
@@ -238,13 +238,14 @@ html, body { background: #2A2A2A; font-family: var(--font-body); }
 .brief-link:hover { color: #000; text-decoration: underline; }
 
 /* Print */
+@page { size: A4; margin: 0; }
 @media print {
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  html, body { background: white; }
+  html, body { background: white; margin: 0; padding: 0; }
   .kit-stage { padding: 0; gap: 0; background: white; }
   .brief-page {
     width: 210mm; height: 297mm;
-    box-shadow: none; page-break-after: always; overflow: visible;
+    box-shadow: none; page-break-after: always; overflow: hidden;
   }
   .brief-cover { background-image: url("assets/cover-texture.png"); }
 }
@@ -265,8 +266,7 @@ html, body { background: #2A2A2A; font-family: var(--font-body); }
       <div class="brief-cover__title">
         <div class="brief-cover__eyebrow">Post-Consultation · Performance Nutrition</div>
         <div class="brief-cover__line">POST</div>
-        <div class="brief-cover__line">CONSULT-</div>
-        <div class="brief-cover__line">ATION</div>
+        <div class="brief-cover__line">CONSULTATION</div>
         <div class="brief-cover__line brief-cover__line--grey">NOTES</div>
       </div>
     </div>
