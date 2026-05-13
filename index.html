@@ -11,6 +11,12 @@
     margin: 0; padding: 0;
     background: #2A2A2A;
     min-height: 100vh;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   .kit-stage {
     display: flex;
@@ -181,8 +187,16 @@
       box-shadow: none;
       page-break-after: always;
       break-after: page;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
     .brief-page:last-of-type { page-break-after: avoid; break-after: avoid; }
+
+    /* Force all background colours and images to print */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
   }
   @page { size: A4 portrait; margin: 0; }
 </style>
@@ -252,7 +266,7 @@
       <h1 class="brief-h1">CONTEXT<br>&amp; GOALS</h1>
       <hr class="brief-rule--strong" style="margin-bottom:20px;">
 
-      <p class="brief-body" style="margin-bottom:20px;">Your weight has dropped off over several months, from 97kg down to 91kg, driven by a run of travel, a house move, and a demanding work period rather than any deliberate change to how you eat. The structure across your main meals is solid and protein intake across the day is likely already in a good place. Your focus should be on adding food between those meals to close the gap between what you are spending and what you are taking in.</p>
+      <p class="brief-body" style="margin-bottom:20px;">Your weight has dropped off over several months, from 97kg down to 91kg, driven by a run of travel, a house move, and a demanding work period. The structure across your main meals is solid and protein intake across the day is likely already in a good place. Your focus should be on adding food between those meals to close the gap between what you are spending and what you are taking in.</p>
 
       <div class="brief-section">
         <div class="brief-section__bar">
