@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armour Performance Nutrition — Post-Consultation Notes · A23067960</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #2A2A2A;
+    min-height: 100vh;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Toolbar */
+  .kit-toolbar__meta { color: rgba(255,255,255,0.5); }
+  .kit-toolbar__nav { flex-wrap: wrap; }
+  .kit-toolbar__btn.active { background: #fff; color: #000; border-color: #fff; }
+
+  /* Cover texture path override */
+  .brief-cover {
+    background: #000 url("assets/cover-texture.png") center/cover no-repeat;
+  }
+  .brief-cover__top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .brief-cover__wordmark {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 20px; letter-spacing: 0.02em; text-transform: uppercase; color: #fff;
+  }
+  .brief-cover__wordmark span {
+    font-weight: 400; font-size: 13px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5); display: block; margin-top: 2px;
+  }
+  .brief-cover__ident {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); text-align: right; line-height: 1.8;
+  }
+  .brief-cover__title { margin-top: auto; margin-bottom: 48px; }
+  .brief-cover__eyebrow {
+    font-family: var(--font-body); font-weight: 600; font-size: 11px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-bottom: 18px;
+  }
+  .brief-cover__line {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 104px; line-height: 0.90; letter-spacing: -0.015em;
+    text-transform: uppercase; display: block;
+  }
+  .brief-cover__line--grey { color: var(--grey-400); }
+  .brief-cover__divider {
+    border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 0;
+  }
+
+  /* List styles */
+  .brief-list {
+    list-style: none; margin: 0 0 16px; padding: 0;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .brief-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .brief-list__bullet {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.14em;
+    color: var(--grey-400); min-width: 18px; padding-top: 2px;
+    user-select: none;
+  }
+  .brief-list__text { font-size: 13px; line-height: 1.55; color: #000; }
+
+  /* Meal grid */
+  .brief-meal-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin-bottom: 20px;
+  }
+
+  /* ---- Print / PDF ---- */
+  @media print {
+    html, body { background: #fff; }
+    .kit-stage { padding: 0; gap: 0; align-items: flex-start; }
+    .kit-toolbar { display: none; }
+    .brief-page {
+      display: block !important;
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+    }
+    .brief-page:last-of-type { page-break-after: avoid; break-after: avoid; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+  @page { size: A4 portrait; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="kit-stage">
+
+  <!-- Toolbar -->
+  <div class="kit-toolbar">
+    <span class="kit-toolbar__brand">ARMOUR</span>
+    <span class="kit-toolbar__meta">Post-Consultation Notes · A23067960 · 12.05.26</span>
+    <nav class="kit-toolbar__nav">
+      <button class="kit-toolbar__btn active" onclick="showPage(0,this)">01 Cover</button>
+      <button class="kit-toolbar__btn" onclick="showPage(1,this)">02 Overview</button>
+      <button class="kit-toolbar__btn" onclick="showPage(2,this)">03 Actions</button>
+      <button class="kit-toolbar__btn" onclick="showPage(3,this)">04 Anchors I</button>
+      <button class="kit-toolbar__btn" onclick="showPage(4,this)">05 Anchors II</button>
+      <button class="kit-toolbar__btn" onclick="showPage(5,this)">06 Meals</button>
+      <button class="kit-toolbar__btn" onclick="printAll()" style="margin-left:12px;border-color:rgba(255,255,255,0.6);">&#9113; Print / PDF</button>
+    </nav>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 1 — COVER
+  ============================================================ -->
+  <div class="brief-page brief-page--dark" id="page-0">
+    <div class="brief-page__inner brief-page__inner--bleed">
+      <div class="brief-cover">
+
+        <div class="brief-cover__top">
+          <div class="brief-cover__wordmark">
+            ARMOUR
+            <span>Performance Nutrition</span>
+          </div>
+          <div class="brief-cover__ident">
+            Post-Consultation Notes<br>
+            Ref: A23067960<br>
+            12.05.26
+          </div>
+        </div>
+
+        <div class="brief-cover__title">
+          <div class="brief-cover__eyebrow">Performance Nutrition · Post-Consultation</div>
+          <span class="brief-cover__line">POST</span>
+          <span class="brief-cover__line brief-cover__line--grey">CONSULT&shy;ATION</span>
+          <span class="brief-cover__line">NOTES</span>
+        </div>
+
+        <hr class="brief-cover__divider">
+
+      </div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>01 / 06</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 2 — OVERVIEW & YOUR GOALS
+  ============================================================ -->
+  <div class="brief-page" id="page-1" style="display:none;">
+    <div class="brief-page__inner">
+
+      <div class="brief-eyebrow">Post-Consultation · A23067960</div>
+      <h1 class="brief-h1" style="font-size:48px;margin-bottom:12px;">OVERVIEW<br>&amp; GOALS</h1>
+      <hr class="brief-rule--strong" style="margin-bottom:20px;">
+
+      <div class="brief-section" style="margin-bottom:16px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">01</span>
+          <span class="brief-section__title">Overview</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:14px;">The main focus of our conversation was on building a handful of consistent habits that fit into your current life rather than requiring you to structure your life around them. Energy was the primary goal we agreed on, with gradual weight loss as a secondary outcome that tends to follow when the basics are in place.</p>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:24px;">The approach below is deliberately straightforward. There is a lot that could be addressed, but trying to change too many things at once is one of the most reliable ways to change nothing. The aim is to identify a small number of things that hold even when you're busy, tired, or away, and build from there.</p>
+
+      <div class="brief-section" style="margin-bottom:16px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">02</span>
+          <span class="brief-section__title">Your Goals</span>
+        </div>
+      </div>
+
+      <ul class="brief-list">
+        <li>
+          <span class="brief-list__bullet">→</span>
+          <span class="brief-list__text">Improve day-to-day energy</span>
+        </li>
+        <li>
+          <span class="brief-list__bullet">→</span>
+          <span class="brief-list__text">Build 2–3 consistent eating habits that hold regardless of what is going on at home</span>
+        </li>
+        <li>
+          <span class="brief-list__bullet">→</span>
+          <span class="brief-list__text">Bring more structure to meals and reduce grazing through the day</span>
+        </li>
+        <li>
+          <span class="brief-list__bullet">→</span>
+          <span class="brief-list__text">Lose some weight gradually as a by-product of getting the above in place</span>
+        </li>
+      </ul>
+
+      <div class="brief-highlight" style="margin-top:8px;">
+        <div class="brief-highlight__label">The Focus</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num" style="font-size:38px;line-height:1.05;">HABITS FIRST.</span>
+        </div>
+        <div class="brief-highlight__value" style="margin-top:0;">
+          <span class="brief-highlight__num" style="font-size:38px;line-height:1.05;">OUTCOMES FOLLOW.</span>
+        </div>
+        <p class="brief-highlight__body">Energy and gradual weight loss are the targets. Consistent, simple habits are the mechanism. Structure your day around the habits — not the other way round.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition · A23067960</span>
+      <span>02 / 06</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 3 — KEY ACTIONS
+  ============================================================ -->
+  <div class="brief-page" id="page-2" style="display:none;">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-bottom:18px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">03</span>
+          <span class="brief-section__title">Key Actions</span>
+        </div>
+      </div>
+
+      <!-- Action 1 -->
+      <div class="brief-section" style="margin-bottom:12px;">
+        <div class="brief-section__bar" style="background:#1F1F1F;">
+          <span class="brief-section__num">01</span>
+          <span class="brief-section__title" style="font-size:17px;">Work towards three consistent meals per day</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:10px;">The current pattern of grabbing food when there is a window, eating late after the kids are down, and grazing in between is currently not fully serving you. Three consistent meals, even imperfect ones, will reduce the amount of food decisions you are making throughout the day and quieten the background noise that tends to lead to snacking.</p>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:20px;">Start with breakfast. On Sunday evening, make a large batch of overnight oats — a single container covers the full week, or you can do individual portions with slightly different flavours. Oats, milk, or a milk alternative, Greek yogurt, and a handful of fresh or frozen fruit is all it takes. You can also add nuts and seeds for more micronutrients and fibre, there are lots of ways you can customise and change the flavour from day to day or week to week. They are ready to go in the morning with no decisions involved. From there, work towards a consistent lunch and an earlier evening meal. The Healthy Eating Anchors section gives a framework for building this in with your partner.</p>
+
+      <!-- Action 2 -->
+      <div class="brief-section" style="margin-bottom:12px;">
+        <div class="brief-section__bar" style="background:#1F1F1F;">
+          <span class="brief-section__num">02</span>
+          <span class="brief-section__title" style="font-size:17px;">Cook once, eat twice</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:0;">Your wife's cooking is already one of the strongest things going. The aim is not to change what she is making, it is to deliberately scale it so there is always something ready the following day. For the big pot meals you already make: make them bigger, portion them out, and lunch is covered. Curries, stews, chilli, pasta dishes — all of these scale well and hold well in the fridge for two to three days. The Simple Meal Frameworks section gives some quick plug-and-play options for when variety is needed without the prep overhead.</p>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition · A23067960</span>
+      <span>03 / 06</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 4 — KEY ACTION 3 + ANCHORS INTRO
+  ============================================================ -->
+  <div class="brief-page" id="page-3" style="display:none;">
+    <div class="brief-page__inner">
+
+      <!-- Action 3 -->
+      <div class="brief-section" style="margin-bottom:12px;">
+        <div class="brief-section__bar" style="background:#1F1F1F;">
+          <span class="brief-section__num">03</span>
+          <span class="brief-section__title" style="font-size:17px;">Set process goals and co-create them with your partner</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:10px;">We talked about the putting your running shoes on example — the goal is putting the trainers on, not running 5km every day. Scaling goals to the smallest meaningful action should not be viewed as setting the bar low; it is removing the main reason that momentum stalls. When a target is achievable on a bad day, there is no such thing as a failed week or day. Setting targets at a level where missing them becomes a source of frustration tends to be what drives the burn-out cycle.</p>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:24px;">The other part of this is presenting goals to your partner as suggestions rather than a plan you have already decided on. Things that are co-created tend to hold up better than things that are self-imposed, particularly in a shared household. "What do you think about trying..." lands differently to "I am going to..." and is more likely to get you pulling in the same direction.</p>
+
+      <!-- Section 4 intro -->
+      <div class="brief-section" style="margin-bottom:16px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">04</span>
+          <span class="brief-section__title">Healthy Eating Anchors</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:10px;">Part of our discussion highlighted that there are a few areas we could work on. Rather than trying to address everything at once, the focus here is to narrow things down.</p>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:10px;">The aim is to identify a small number of actions you can rely on, even when time, energy, or motivation is limited.</p>
+
+      <div class="brief-highlight" style="margin-bottom:0;">
+        <div class="brief-highlight__label">The Principle</div>
+        <div class="brief-highlight__value">
+          <span class="brief-highlight__num" style="font-size:42px;">THESE ARE YOUR ANCHORS.</span>
+        </div>
+        <p class="brief-highlight__body">Not the perfect version of your diet. The things that keep everything moving in the right direction when other areas are less structured.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition · A23067960</span>
+      <span>04 / 06</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 5 — YOUR ANCHORS
+  ============================================================ -->
+  <div class="brief-page" id="page-4" style="display:none;">
+    <div class="brief-page__inner">
+
+      <!-- What are anchors -->
+      <div class="brief-section" style="margin-bottom:14px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">04</span>
+          <span class="brief-section__title">Healthy Eating Anchors</span>
+          <span class="brief-section__sub">Continued</span>
+        </div>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:14px;">
+        <div class="brief-panel__title">What Are Anchors?</div>
+        <p class="brief-panel__body" style="margin-bottom:8px;">Anchors are 2–3 non-negotiable habits that:</p>
+        <ul class="brief-list" style="margin-bottom:0;">
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Fit into your current routine</span></li>
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Support your goals</span></li>
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Can be repeated consistently, even during busy or difficult periods</span></li>
+        </ul>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:14px;">
+        <div class="brief-panel__title">Why This Matters</div>
+        <p class="brief-panel__body">Motivation and ideal conditions are not reliable. A small number of anchors keeps things moving even when everything else is less structured. Having something fixed in place reduces decision-making, maintains momentum, and prevents the complete drop-off that tends to happen during busy or stressful periods.</p>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:18px;">
+        <div class="brief-panel__title">How Your Anchors Were Chosen</div>
+        <p class="brief-panel__body" style="margin-bottom:8px;">The anchors below were selected based on three questions:</p>
+        <ul class="brief-list" style="margin-bottom:0;">
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">What is already happening most days that can be built on rather than replaced?</span></li>
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Where are the biggest gaps between what is currently happening and what would move things forward?</span></li>
+          <li><span class="brief-list__bullet">—</span><span class="brief-list__text">What will still be achievable on a difficult day?</span></li>
+        </ul>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:14px;">These were discussed in the consultation and are intended as starting points to agree with your partner rather than a unilateral decision. Importantly, you don't have to have the same 3 anchors — you could agree on 1–2 to both commit to, so you have some shared goals and can support each other, and 1 each that you do that is more for you based on your own specific needs.</p>
+
+      <div class="brief-panel" style="margin-bottom:10px;">
+        <div class="brief-panel__title">Anchor 1 — Two glasses of water first thing in the morning</div>
+        <p class="brief-panel__body">Hydration was already on your radar so let's address it first thing with a straightforward solution.</p>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:10px;">
+        <div class="brief-panel__title">Anchor 2 — Breakfast within an hour of waking</div>
+        <p class="brief-panel__body">Overnight oats made on Sunday evening means this costs zero effort in the morning. This is the one anchor that changes the pattern of the day the most — eating early reduces the grazing that builds through the morning.</p>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:14px;">
+        <div class="brief-panel__title">Anchor 3 — Your choice</div>
+        <p class="brief-panel__body">Set your own final anchor based on what you want to achieve and based on that mindset of minimum effective dose to improve energy and overall nutrition.</p>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:0;background:#fff;border-left-color:#000;">
+        <div class="brief-panel__title">How to Use These</div>
+        <p class="brief-panel__body">Focus on getting these in place consistently before working on anything else. Other areas can be improved over time, but these should remain stable even when things are busy. They are worth coming back to during difficult periods as a check — if these are happening, things are on track.</p>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition · A23067960</span>
+      <span>05 / 06</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PAGE 6 — SIMPLE MEAL FRAMEWORKS
+  ============================================================ -->
+  <div class="brief-page" id="page-5" style="display:none;">
+    <div class="brief-page__inner">
+
+      <div class="brief-section" style="margin-bottom:16px;">
+        <div class="brief-section__bar">
+          <span class="brief-section__num">05</span>
+          <span class="brief-section__title">Simple Meal Frameworks</span>
+        </div>
+      </div>
+
+      <p class="brief-body" style="max-width:none;margin-bottom:16px;">Part of our discussion touched on how easy it is to end up eating whatever is available when the day has already been long and the kids have finally gone to bed. Healthy eating does not need to involve complex recipes, long prep times, or starting from scratch every day. In most cases, it comes down to putting together a few simple components.</p>
+
+      <div class="brief-panel" style="margin-bottom:16px;">
+        <div class="brief-panel__title">Simple Meal Framework</div>
+        <p class="brief-panel__body" style="margin-bottom:8px;">Most meals can be built using a very simple structure:</p>
+        <ul class="brief-list" style="margin-bottom:0;">
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Protein — chicken, mince, fish, eggs, beans</span></li>
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Carbohydrate — rice, pasta, potatoes, wraps, bread</span></li>
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Vegetables — fresh, frozen, pre-prepped</span></li>
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Flavour — sauce, seasoning, spices</span></li>
+        </ul>
+      </div>
+
+      <p class="brief-eyebrow" style="margin-bottom:12px;">Meal Frameworks — use these as plug-and-play options. All scale well and make portions for the following day.</p>
+
+      <div class="brief-meal-grid">
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Stir-Fry</div>
+          <ul class="brief-list" style="margin-bottom:0;">
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Stir-fry veg bag</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Rice or noodles</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Chicken, prawns, or beef</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Packet stir-fry sauce</span></li>
+          </ul>
+        </div>
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Mexican</div>
+          <ul class="brief-list" style="margin-bottom:0;">
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Peppers and onions (fresh, frozen, or pre-chopped)</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Chicken or beef mince</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Wraps or rice</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Fajita spice mix</span></li>
+          </ul>
+        </div>
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Italian</div>
+          <ul class="brief-list" style="margin-bottom:0;">
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Pasta or filled pasta (ravioli/tortellini)</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Beef mince or chicken</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Jarred tomato sauce</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Frozen spinach or med veg stirred in</span></li>
+          </ul>
+        </div>
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Curry</div>
+          <ul class="brief-list" style="margin-bottom:0;">
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Chicken, chickpeas, or lentils</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Jarred curry sauce</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Microwave rice or naan</span></li>
+            <li><span class="brief-list__bullet">—</span><span class="brief-list__text">Frozen spinach, peas, or mixed veg</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="brief-panel" style="margin-bottom:18px;">
+        <div class="brief-panel__title">Key Principles</div>
+        <ul class="brief-list" style="margin-bottom:0;">
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Convenience foods are a useful tool — not something to always avoid</span></li>
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">A few reliable go-to options will make a bigger difference than trying new recipes every week</span></li>
+          <li><span class="brief-list__bullet">→</span><span class="brief-list__text">Almost all of these will make 2+ portions — portion out the rest for lunch the next day</span></li>
+        </ul>
+      </div>
+
+      <div class="brief-spacer"></div>
+      <hr class="brief-rule" style="margin-bottom:14px;">
+
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <div>
+          <div class="brief-eyebrow" style="margin-bottom:4px;">Prepared by</div>
+          <div style="font-family:var(--font-display);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:0.02em;">Armour Performance Nutrition</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="brief-eyebrow" style="margin-bottom:4px;">Date · Ref</div>
+          <div style="font-family:var(--font-mono);font-size:13px;letter-spacing:0.12em;font-weight:600;">12.05.26 · A23067960</div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey-400);margin-top:4px;">If you have any questions, get in touch.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition · A23067960</span>
+      <span>06 / 06</span>
+    </div>
+  </div>
+
+</div><!-- /kit-stage -->
+
+<script>
+  function printAll() {
+    document.querySelectorAll('.brief-page').forEach(function(p) {
+      p.style.display = 'block';
+    });
+    window.print();
+    // Restore single-page view after print dialog
+    setTimeout(function() {
+      document.querySelectorAll('.brief-page').forEach(function(p, i) {
+        p.style.display = i === currentPage ? 'block' : 'none';
+      });
+    }, 1000);
+  }
+
+  var currentPage = 0;
+
+  function showPage(index, btn) {
+    currentPage = index;
+    document.querySelectorAll('.brief-page').forEach(function(p) {
+      p.style.display = 'none';
+    });
+    document.getElementById('page-' + index).style.display = 'block';
+    document.querySelectorAll('.kit-toolbar__btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+  }
+
+  // Show cover on load
+  document.getElementById('page-0').style.display = 'block';
+</script>
+</body>
+</html>
