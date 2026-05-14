@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armour Performance Nutrition — Post-Consultation Notes — A30122352</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --ink-000: #000000;
+  --grey-500: #4A4A4A;
+  --grey-400: #6B6B6B;
+  --grey-300: #9A9A9A;
+  --grey-200: #C4C4C4;
+  --grey-100: #ECECEC;
+  --paper: #FFFFFF;
+  --on-paper-rule: rgba(0,0,0,0.10);
+  --bg-panel: #ECECEC;
+  --fg-primary: #000000;
+  --fg-secondary: #4A4A4A;
+  --fg-muted: #9A9A9A;
+  --font-display: 'Barlow Condensed', 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #2A2A2A; font-family: var(--font-body); }
+
+/* Stage */
+.kit-stage {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 24px; padding: 32px 24px 80px;
+}
+
+/* Page wrapper — A4 @ 96dpi */
+.brief-page {
+  position: relative; width: 794px; height: 1123px;
+  background: var(--paper); color: var(--fg-primary);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35); overflow: hidden;
+}
+.brief-page__inner {
+  padding: 52px 56px 70px;
+  height: 100%; display: flex; flex-direction: column;
+}
+.brief-page__pagenum {
+  position: absolute; left: 56px; right: 56px; bottom: 22px;
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--grey-300);
+}
+
+/* Cover */
+.brief-cover {
+  position: relative; width: 100%; height: 100%;
+  background: #000 url("assets/cover-texture.png") center/cover no-repeat;
+  color: #fff; padding: 48px 56px;
+  display: flex; flex-direction: column;
+}
+.brief-cover__top { display: flex; justify-content: space-between; align-items: center; }
+.brief-cover__logo { height: 140px; filter: invert(1); }
+.brief-cover__ident {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+}
+.brief-cover__title { margin-top: auto; margin-bottom: 44px; }
+.brief-cover__eyebrow {
+  font-family: var(--font-body); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62); margin-bottom: 16px;
+}
+.brief-cover__line {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 78px; line-height: 0.92; letter-spacing: -0.015em; text-transform: uppercase;
+}
+.brief-cover__line--grey { color: rgba(255,255,255,0.35); }
+.brief-cover__strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.18); padding-top: 22px;
+}
+.brief-cover__metric { padding: 0 16px; border-left: 1px solid rgba(255,255,255,0.12); }
+.brief-cover__metric:first-child { border-left: 0; padding-left: 0; }
+.brief-cover__metric-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.62); margin-bottom: 8px;
+}
+.brief-cover__metric-num {
+  font-family: var(--font-display); font-weight: 900; font-size: 34px; line-height: 1;
+}
+.brief-cover__metric-unit {
+  font-family: var(--font-display); font-weight: 600; font-size: 12px;
+  color: rgba(255,255,255,0.62); margin-left: 4px; text-transform: uppercase;
+}
+
+/* Section header */
+.brief-section { margin-bottom: 18px; }
+.brief-section__rule { height: 8px; background: #000; }
+.brief-section__bar {
+  background: #000; color: #fff;
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 12px 20px;
+}
+.brief-section__num {
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.22em; color: rgba(255,255,255,0.6);
+}
+.brief-section__title {
+  font-family: var(--font-display); font-weight: 800; font-size: 22px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+
+/* Highlight / callout box */
+.brief-highlight {
+  background: #000; color: #fff;
+  padding: 16px 20px; margin-bottom: 14px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.brief-highlight__label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+}
+.brief-highlight__text {
+  font-family: var(--font-display); font-weight: 800; font-size: 17px;
+  text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;
+}
+.brief-highlight__body {
+  font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.80); margin-top: 3px;
+}
+
+/* Grey supporting panel */
+.brief-panel {
+  background: var(--grey-100); border-left: 2px solid #000;
+  padding: 14px 18px; margin-bottom: 14px;
+}
+.brief-panel__title {
+  font-family: var(--font-display); font-weight: 700; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px;
+}
+.brief-panel__body { font-size: 12.5px; line-height: 1.55; color: #000; }
+
+/* Metric strip */
+.brief-strip {
+  display: grid; padding: 16px 20px; margin-bottom: 16px;
+}
+.brief-strip--dark { background: #000; color: #fff; }
+.brief-strip--light { background: var(--grey-100); }
+.brief-strip__metric { padding: 0 14px; }
+.brief-strip__metric:first-child { padding-left: 0; }
+.brief-strip__metric + .brief-strip__metric { border-left: 1px solid rgba(255,255,255,0.14); }
+.brief-strip--light .brief-strip__metric + .brief-strip__metric { border-left: 1px solid rgba(0,0,0,0.10); }
+.brief-strip__label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.20em;
+  text-transform: uppercase; margin-bottom: 5px; opacity: 0.62;
+}
+.brief-strip__num {
+  font-family: var(--font-display); font-weight: 900; font-size: 28px; line-height: 1;
+}
+.brief-strip__unit {
+  font-family: var(--font-display); font-weight: 600; font-size: 11px;
+  margin-left: 3px; text-transform: uppercase; opacity: 0.62;
+}
+.brief-strip__sub {
+  font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.45);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-top: 3px;
+}
+.brief-strip--light .brief-strip__sub { color: rgba(0,0,0,0.40); }
+
+/* Table */
+.brief-table {
+  width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 16px;
+}
+.brief-table th {
+  text-align: left; background: #000; color: #fff;
+  padding: 9px 12px; font-family: var(--font-display); font-weight: 700;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em;
+}
+.brief-table td {
+  padding: 9px 12px; border-bottom: 1px solid rgba(0,0,0,0.10);
+  vertical-align: top; font-size: 12.5px; line-height: 1.5;
+}
+.brief-table tr:last-child td { border-bottom: 0; }
+.brief-table__key {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em;
+  font-weight: 600; white-space: nowrap; vertical-align: top;
+}
+.brief-table__code {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.06em; background: #000; color: #fff;
+  padding: 3px 10px; display: inline-block;
+}
+
+/* Tag / status label */
+.brief-tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 9px;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 2px 7px; border: 1px solid #000; vertical-align: middle; margin-left: 8px;
+}
+.brief-tag--active { background: #000; color: #fff; }
+.brief-tag--warn { background: #fff; color: #000; border-color: #000; }
+
+/* Body utilities */
+.brief-eyebrow {
+  font-family: var(--font-body); font-weight: 600; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey-500);
+  margin-bottom: 5px;
+}
+.brief-h2 {
+  font-family: var(--font-display); font-weight: 800; font-size: 26px;
+  line-height: 1; letter-spacing: -0.005em; text-transform: uppercase;
+  margin: 14px 0 10px;
+}
+.brief-h3 {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  text-transform: uppercase; letter-spacing: 0.04em; margin: 12px 0 8px;
+}
+.brief-body { font-size: 12.5px; line-height: 1.55; color: #000; max-width: 68ch; }
+.brief-body + .brief-body { margin-top: 8px; }
+.brief-rule { border: 0; border-top: 1px solid rgba(0,0,0,0.10); margin: 12px 0; }
+.brief-rule--strong { border: 0; border-top: 2px solid #000; margin: 12px 0; }
+.brief-spacer { flex: 1; }
+.brief-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+/* Product image tile */
+.brief-product-img {
+  width: 100%; height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  background: #F5F5F4; border: 1px solid rgba(0,0,0,0.08);
+}
+.brief-product-img img { max-height: 88px; max-width: 100%; object-fit: contain; }
+
+/* URL link */
+.brief-link {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em;
+  color: var(--grey-500); text-decoration: none;
+  display: block; margin-top: 3px;
+}
+.brief-link:hover { color: #000; text-decoration: underline; }
+
+/* Print */
+@page { size: A4; margin: 0; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: white; margin: 0; padding: 0; }
+  .kit-stage { padding: 0; gap: 0; background: white; }
+  .brief-page {
+    width: 210mm; height: 297mm;
+    box-shadow: none; page-break-after: always; overflow: hidden;
+  }
+  .brief-cover { background-image: url("assets/cover-texture.png"); }
+}
+</style>
+</head>
+<body>
+<div class="kit-stage">
+
+  <!-- ══════════════════════════════════════
+       PAGE 1 — COVER
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-cover">
+      <div class="brief-cover__top">
+        <img class="brief-cover__logo" src="assets/armour-logo.webp" alt="Armour Performance Nutrition">
+        <div class="brief-cover__ident">Notes · A30122352 · 08.05.26</div>
+      </div>
+      <div class="brief-cover__title">
+        <div class="brief-cover__eyebrow">Post-Consultation · Performance Nutrition</div>
+        <div class="brief-cover__line">POST</div>
+        <div class="brief-cover__line">CONSULTATION</div>
+        <div class="brief-cover__line brief-cover__line--grey">NOTES</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 2 — OVERVIEW + GOALS
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">01</span>
+          <span class="brief-section__title">Overview</span>
+        </div>
+      </div>
+
+      <p class="brief-body">Your training week is well-structured and your understanding of what you need from your nutrition is clear. Your metabolic cart data from VO₂ max testing gives useful context: you oxidise carbohydrate at a high rate, even at lower intensities, and your capacity to rely on fat as a fuel is relatively limited. This is not unusual given a high-intensity training background, but it directly shapes the approach. The focus below targets two things: overall carbohydrate availability across the week, and how to apply that at race day to address the power drop in the final stages.</p>
+
+      <div style="height:14px;"></div>
+
+      <div class="brief-highlight">
+        <div class="brief-highlight__label">Key Finding — Metabolic Cart Data</div>
+        <div class="brief-highlight__text">High carbohydrate oxidation rate — demand above average across all intensities</div>
+        <div class="brief-highlight__body">Fat oxidation capacity is relatively limited. Current carbohydrate targets are likely below your actual needs at both rest and training days.</div>
+      </div>
+
+      <div style="height:8px;"></div>
+
+      <div class="brief-h2">Your Goals</div>
+      <hr class="brief-rule--strong">
+
+      <div class="brief-panel" style="margin-bottom:0;">
+        <div class="brief-panel__body">
+          <ul style="list-style:none; padding:0; margin:0;">
+            <li style="padding:9px 0; border-bottom:1px solid rgba(0,0,0,0.10); font-size:12.5px; line-height:1.45;">
+              &rarr;&nbsp;&nbsp;Increase ability to push in the late stages of races
+            </li>
+            <li style="padding:9px 0; border-bottom:1px solid rgba(0,0,0,0.10); font-size:12.5px; line-height:1.45;">
+              &rarr;&nbsp;&nbsp;Maintain weight around 66kg without compromising energy levels
+            </li>
+            <li style="padding:9px 0; font-size:12.5px; line-height:1.45;">
+              &rarr;&nbsp;&nbsp;Sustain power output across repeated high-intensity efforts throughout the race
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>02</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 3 — KEY ACTIONS
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">02</span>
+          <span class="brief-section__title">Key Actions</span>
+        </div>
+      </div>
+
+      <!-- Action 1 -->
+      <div class="brief-h3">1. Increase Daily Carbohydrate Intake</div>
+
+      <div class="brief-strip brief-strip--dark" style="grid-template-columns: repeat(3, 1fr); margin-bottom:12px;">
+        <div class="brief-strip__metric">
+          <div class="brief-strip__label">Rest Day Target</div>
+          <div>
+            <span class="brief-strip__num">4</span>
+            <span class="brief-strip__unit">g/kg</span>
+          </div>
+          <div class="brief-strip__sub">~264g</div>
+        </div>
+        <div class="brief-strip__metric">
+          <div class="brief-strip__label">Training Day Target</div>
+          <div>
+            <span class="brief-strip__num">6–7</span>
+            <span class="brief-strip__unit">g/kg</span>
+          </div>
+          <div class="brief-strip__sub">~396–462g incl. in-session</div>
+        </div>
+        <div class="brief-strip__metric">
+          <div class="brief-strip__label">Current (estimated)</div>
+          <div>
+            <span class="brief-strip__num">3–5</span>
+            <span class="brief-strip__unit">g/kg</span>
+          </div>
+          <div class="brief-strip__sub">Below actual needs</div>
+        </div>
+      </div>
+
+      <p class="brief-body">You are currently targeting around 3g/kg on rest days and 5g/kg on active days — both are likely lower than your actual needs. Your metabolic cart data shows a high carbohydrate oxidation rate, meaning demand is above average even at lower intensities. Achieve the new targets through increasing portion sizes of foods you already eat, as well as the swap outlined below.</p>
+
+      <hr class="brief-rule">
+
+      <!-- Action 2 -->
+      <div class="brief-h3">2. Replace SIS Rego with Chocolate Milk</div>
+
+      <div class="brief-grid-2" style="gap:14px; margin-bottom:12px;">
+        <div>
+          <div class="brief-highlight" style="margin-bottom:0; height:100%;">
+            <div class="brief-highlight__label">Post-Session Target — 66kg</div>
+            <div class="brief-highlight__text">550–600ml semi-skimmed choc milk</div>
+            <div class="brief-highlight__body">
+              ~66–72g carbohydrate &amp; 18–20g protein.<br>
+              Keep 5g creatine alongside — mix in or take separately.
+            </div>
+          </div>
+        </div>
+        <div class="brief-product-img">
+          <img src="assets/food/tesco-choc-milk.png" alt="Chocolate milk">
+        </div>
+      </div>
+
+      <p class="brief-body">Chocolate milk is a cost-effective alternative to SIS Rego that meets post-session recovery targets without compromise. At 66kg, aim for 1.0–1.2g/kg carbohydrate (66–79g) and ~0.3g/kg protein (~20g). Chocolate milk has been shown to often outperform premium recovery blends, possibly due to the 3:1 carbohydrate ratio and flavonoids in the cocoa.</p>
+
+      <hr class="brief-rule">
+
+      <!-- Action 3 -->
+      <div class="brief-h3">3. Introduce Carbohydrate Periodisation on Easy Rides</div>
+
+      <p class="brief-body">On lower-intensity Z2 rides (1–1.5 hours), swap the cereal bar beforehand for a small fat-based snack: a tablespoon of nut butter, a small portion of eggs, or a handful of nuts. This targets those sessions only. VO₂ max work, threshold sessions, and the long ride remain fully fuelled as normal. The aim is to build fat oxidation capacity over time, which combines with an aggressive carbohydrate fuelling strategy on race day. Full detail in Section 04.</p>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>03</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 4 — RACE-DAY REFERENCE
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">03</span>
+          <span class="brief-section__title">Race-Day Reference</span>
+        </div>
+      </div>
+
+      <div class="brief-h2">Cramping — What Is Likely Going On</div>
+      <hr class="brief-rule--strong">
+
+      <p class="brief-body">The most supported explanation for cramping in endurance athletes is neuromuscular fatigue rather than dehydration or electrolyte loss in isolation. In a 2-hour race with 8–10 high-intensity efforts, there is meaningful time spent above critical power, and the fatigue built in the earlier stages accumulates towards muscle control breakdown around the 1.5-hour mark.</p>
+
+      <div style="height:10px;"></div>
+
+      <p class="brief-body">Review your power file after races and look at how much time was spent above critical power in the first 45–60 minutes — this will give a useful picture of what is driving the cramp.</p>
+
+      <div style="height:10px;"></div>
+
+      <p class="brief-body">From a nutrition standpoint, increasing overall carbohydrate availability — both day-to-day and on race day — is the most direct lever. Personalised sweat data will give a more confident picture of whether your fluid intake is appropriate. See Section 05.</p>
+
+      <div style="height:16px;"></div>
+
+      <div class="brief-panel">
+        <div class="brief-panel__title">Pickle Juice — Acute Cramping Intervention</div>
+        <div class="brief-panel__body">Can work at the onset of cramping. The most likely mechanism is a neural reflex response rather than electrolyte replacement — a small amount (20–40ml) taken at the first sign can interrupt the cramp. Worth having available for hotter races.</div>
+      </div>
+
+      <div style="height:8px;"></div>
+
+      <div class="brief-highlight">
+        <div class="brief-highlight__label">Bottom Line — Cramping</div>
+        <div class="brief-highlight__text">Fuel more. Test your sweat rate. Have pickle juice available on race day.</div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>04</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 5 — CARB PERIODISATION
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">04</span>
+          <span class="brief-section__title">Carbohydrate Periodisation</span>
+        </div>
+      </div>
+
+      <p class="brief-body">Your metabolic cart data shows high carbohydrate oxidation at lower intensities, meaning there is meaningful room to develop fat oxidation and reduce carbohydrate reliance at this end of your training spectrum. Carbohydrate periodisation is a targeted way to work on this.</p>
+
+      <div style="height:12px;"></div>
+
+      <div class="brief-h3">What Is Carbohydrate Periodisation?</div>
+      <p class="brief-body">Adjusting carbohydrate intake based on the demands of the session rather than eating the same way every day. This supports both performance when quality matters and adaptations linked to fat oxidation and metabolic flexibility — the ability to switch between fuel sources as the work requires it.</p>
+
+      <div class="brief-strip brief-strip--light" style="grid-template-columns: 1fr 1fr; margin-top:12px;">
+        <div class="brief-strip__metric">
+          <div class="brief-strip__label">High-demand sessions</div>
+          <div style="font-size:13px; font-weight:600; margin-top:4px; line-height:1.2;">Higher CHO<br>availability</div>
+        </div>
+        <div class="brief-strip__metric">
+          <div class="brief-strip__label">Lower-intensity sessions</div>
+          <div style="font-size:13px; font-weight:600; margin-top:4px; line-height:1.2;">Occasionally lower<br>CHO availability</div>
+        </div>
+      </div>
+
+      <div class="brief-h3">What "Train Low" Actually Means</div>
+      <p class="brief-body">Train low does <em>not</em> mean training completely depleted, avoiding carbohydrates entirely, or doing every session fasted. It refers to selected sessions where carbohydrate availability is intentionally reduced beforehand — to create a specific adaptation stimulus, not to compromise training quality.</p>
+
+      <div style="height:10px;"></div>
+
+      <div class="brief-grid-2">
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Appropriate For</div>
+          <div class="brief-panel__body">
+            <ul style="padding-left:16px; margin:0;">
+              <li style="margin-bottom:5px;">Lower-intensity endurance sessions</li>
+              <li style="margin-bottom:5px;">Shorter aerobic sessions (under 60–90 min)</li>
+              <li>Sessions where metabolic adaptation is the goal</li>
+            </ul>
+          </div>
+        </div>
+        <div class="brief-panel" style="margin-bottom:0;">
+          <div class="brief-panel__title">Not Appropriate For</div>
+          <div class="brief-panel__body">
+            <ul style="padding-left:16px; margin:0;">
+              <li style="margin-bottom:5px;">Long sessions where fuelling quality matters</li>
+              <li style="margin-bottom:5px;">Sessions requiring high power output</li>
+              <li>Signs of low energy availability or poor recovery</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>05</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 6 — CARB PERIODISATION (cont.)
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-eyebrow" style="margin-bottom:14px;">04 / Carbohydrate Periodisation — continued</div>
+
+      <div class="brief-h3">Practical Approach</div>
+
+      <div class="brief-panel">
+        <div class="brief-panel__title">Option 1 — Lower-Carbohydrate Pre-Session Meal (Most Practical)</div>
+        <div class="brief-panel__body">Rather than training fully fasted, reduce carbohydrate intake before selected lower-intensity sessions. This maintains some energy intake while reducing carbohydrate availability. Examples: Greek yogurt with nut butter &nbsp;·&nbsp; Eggs and avocado &nbsp;·&nbsp; Protein shake with a handful of nuts &nbsp;·&nbsp; A tablespoon of nut butter on its own</div>
+      </div>
+
+      <div class="brief-panel">
+        <div class="brief-panel__title">Option 2 — Morning Low-Glycogen Session</div>
+        <div class="brief-panel__body">Occasionally complete an easier aerobic morning session before a higher-carbohydrate breakfast. Keep these sessions under 60–90 minutes at low to moderate intensity. Your shorter easy Z2 rides are a good fit for this.</div>
+      </div>
+
+      <div class="brief-h3">How Often</div>
+      <p class="brief-body">With five sessions per week, 1–2 low-carbohydrate sessions per week is appropriate — roughly your two Z2 endurance rides. No more than one in three sessions should use this approach, and only where the intensity genuinely supports it. VO₂ max sessions, threshold work, and the long ride remain fully fuelled throughout.</p>
+
+      <div style="height:10px;"></div>
+
+      <div class="brief-h3">Making This Work for You</div>
+      <p class="brief-body">Your Tuesday and Thursday endurance rides are the most suitable sessions to trial this. The swap is straightforward: replace the cereal bar before these sessions with a tablespoon of nut butter or a small portion of eggs. Keep in-session fuelling for any session over 90 minutes. Given that maintaining weight around 66kg is a priority, the aim is to reduce pre-session carbohydrate on selected sessions only — not to reduce overall daily calories.</p>
+
+      <div style="height:10px;"></div>
+
+      <div class="brief-panel" style="margin-bottom:0;">
+        <div class="brief-panel__title">Monitor These Two Indicators</div>
+        <div class="brief-panel__body">
+          <ul style="list-style:none; padding:0; margin:0;">
+            <li style="padding:7px 0; border-bottom:1px solid rgba(0,0,0,0.10);">
+              <strong>Bodyweight</strong> — a meaningful downward trend beyond what you would expect may indicate total energy intake is too low. This matters given your weight target of 66kg.
+            </li>
+            <li style="padding:7px 0;">
+              <strong>Session quality</strong> — if effort during targeted easy sessions starts feeling harder than the intensity warrants, or if recovery between sessions deteriorates, reduce the low-carbohydrate frequency.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>06</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 7 — SWEAT RATE TESTING
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">05</span>
+          <span class="brief-section__title">Sweat Rate Testing</span>
+        </div>
+      </div>
+
+      <p class="brief-body">Understanding how much fluid you actually lose during training is more useful than following general guidelines — individual variation is significant. Sweat rates typically range from 0.5–2.5 L/hour, with most people sitting around 1–1.5 L/hour. Your individual rate depends on physiology, environment, and intensity, which is exactly why it is worth measuring.</p>
+
+      <div style="height:8px;"></div>
+
+      <p class="brief-body">Given that you have experienced cramping in races and are currently using two 700ml bottles per race, testing will confirm whether your current fluid intake is appropriate, too high, or too low for different conditions.</p>
+
+      <div style="height:14px;"></div>
+
+      <div class="brief-h3">How to Measure</div>
+
+      <table class="brief-table">
+        <thead>
+          <tr>
+            <th style="width:100px;">Step</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="brief-table__key">Step 1<br><span style="font-weight:400; color:#6B6B6B; font-size:10px;">Pre-exercise</span></td>
+            <td>Empty bladder. Weigh in minimal or no clothing. Use the same scales each time.</td>
+          </tr>
+          <tr>
+            <td class="brief-table__key">Step 2<br><span style="font-weight:400; color:#6B6B6B; font-size:10px;">During</span></td>
+            <td>Complete a session that reflects your usual training or race intensity. Track all fluid intake — know how much you start and finish with. A trainer-based session works well for controlled conditions. If you urinate, note this separately.</td>
+          </tr>
+          <tr>
+            <td class="brief-table__key">Step 3<br><span style="font-weight:400; color:#6B6B6B; font-size:10px;">Post-exercise</span></td>
+            <td>Weigh again in minimal or no clothing as soon as possible after finishing.</td>
+          </tr>
+          <tr>
+            <td class="brief-table__key">Step 4<br><span style="font-weight:400; color:#6B6B6B; font-size:10px;">Send data</span></td>
+            <td>Pre/post bodyweight &nbsp;·&nbsp; total fluid intake &nbsp;·&nbsp; session duration &nbsp;·&nbsp; conditions (temperature, humidity if known, indoor/outdoor) &nbsp;·&nbsp; any urine losses noted. I will calculate your sweat rate and translate it into a practical hydration plan.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="brief-panel" style="margin-bottom:0;">
+        <div class="brief-panel__title">Important — Sweat Rate Is Not Fixed</div>
+        <div class="brief-panel__body">It changes meaningfully depending on temperature and humidity, exercise intensity, and clothing and kit. Repeat the test across a few different sessions and record conditions each time. This gives a picture of how your sweat rate varies across scenarios, allowing the hydration strategy to be adjusted for expected race conditions.</div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>07</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 8 — SUPPLEMENTS PT 1
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">06</span>
+          <span class="brief-section__title">Supplements</span>
+        </div>
+      </div>
+
+      <div class="brief-panel">
+        <div class="brief-panel__body">Supplements sit at the top of the nutrition pyramid — they support performance, health, and recovery, but are not a substitute for a well-structured diet built around consistent energy intake, appropriate macronutrients, and good meal timing. For performance-focused supplements, always test in training before use in important sessions or events. Individual responses vary.</div>
+      </div>
+
+      <!-- Creatine -->
+      <div class="brief-h3">
+        Creatine Monohydrate
+        <span class="brief-tag brief-tag--active">In Use</span>
+      </div>
+
+      <div class="brief-grid-2">
+        <div>
+          <p class="brief-body">Supports strength, power, and repeated high-intensity efforts. Also has potential cognitive benefits, particularly during periods of stress or sleep deprivation.</p>
+          <div style="height:8px;"></div>
+          <p class="brief-body"><strong>Dose:</strong> 3–5g/day. You are taking 5g — appropriate.<br>
+          <strong>Timing:</strong> Any time of day. Taking alongside a meal or post-session chocolate milk aids absorption.</p>
+          <div style="height:6px;"></div>
+          <a class="brief-link" href="https://www.nutritionx.co.uk/creatine-monohydrate-powder">nutritionx.co.uk — Creatine Monohydrate</a>
+          <a class="brief-link" href="https://www.scienceinsport.com/creatine-400g-unflavoured">scienceinsport.com — Creatine 400g</a>
+        </div>
+        <div>
+          <div class="brief-panel" style="margin-bottom:0; height:100%;">
+            <div class="brief-panel__title">Weight Note</div>
+            <div class="brief-panel__body">May cause a small increase of ~1–2kg due to intracellular water retention. This is not fat gain. For a crit racer focused on power-to-weight, this is worth bearing in mind. The performance benefit generally outweighs this — flag it if it becomes a concern.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="brief-rule">
+
+      <!-- Caffeine -->
+      <div class="brief-h3">
+        Caffeine
+        <span class="brief-tag brief-tag--active">In Use</span>
+      </div>
+
+      <div class="brief-grid-2">
+        <div>
+          <p class="brief-body">Improves alertness, reduces perceived effort, and enhances endurance and high-intensity performance.</p>
+          <div style="height:8px;"></div>
+          <p class="brief-body"><strong>Dose:</strong> 200mg (~3mg/kg at 66kg) — well-matched starting point. You are using this correctly.<br>
+          <strong>Timing:</strong> 20–45 min before exercise. Your current pre-race timing is appropriate.</p>
+          <div style="height:6px;"></div>
+          <a class="brief-link" href="https://www.scienceinsport.com/go-caffeine-shot-cola-12-pack">scienceinsport.com — GO Caffeine Shot</a>
+          <a class="brief-link" href="https://www.nutritionx.co.uk/caffeine-shot">nutritionx.co.uk — Caffeine Shot</a>
+        </div>
+        <div>
+          <div class="brief-panel" style="margin-bottom:0; height:100%;">
+            <div class="brief-panel__title">Evening Race Caveat</div>
+            <div class="brief-panel__body">Can affect sleep. Given races are in the evening, monitor sleep quality on race nights. If it is suffering, consider pulling the timing earlier. Some people perform worse at higher doses — your current dose is sensible. Your Beta Fuel approach already covers combined carbohydrate and caffeine in one product.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>08</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 9 — SUPPLEMENTS PT 2
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-eyebrow" style="margin-bottom:12px;">06 / Supplements — continued</div>
+
+      <!-- Sodium Bicarb -->
+      <div class="brief-h3">
+        Sodium Bicarbonate
+        <span class="brief-tag brief-tag--warn">Trial</span>
+      </div>
+
+      <div class="brief-highlight" style="margin-bottom:10px;">
+        <div class="brief-highlight__label">Starting Dose — 66kg</div>
+        <div class="brief-highlight__text">13g (0.2g/kg) &nbsp;·&nbsp; 60–180 min before exercise</div>
+        <div class="brief-highlight__body">Advance to 20g (0.3g/kg) only after tolerance is confirmed. Must be trialled in training before any important session or event.</div>
+      </div>
+
+      <p class="brief-body">Can improve performance in high-intensity efforts lasting roughly 30 seconds to 10 minutes by buffering acid accumulation. Given the repeated sprint format of crit races, this is worth trialling. A split dosing protocol — dividing the dose across two or three smaller amounts — can reduce gastrointestinal distress if that becomes an issue. Taking it with a small amount of food also helps. I'd be interested to hear how you get on with the Maurten Bicarb product.</p>
+
+      <hr class="brief-rule">
+
+      <!-- Omega-3 -->
+      <div class="brief-h3">
+        Omega-3 PUFAs
+        <span class="brief-tag brief-tag--active">In Use</span>
+      </div>
+      <p class="brief-body">Supports general health, cardiovascular and brain health, and may support recovery and inflammation management. You are taking this via NutritionX — appropriate. <strong>Dose:</strong> 500–1000mg combined EPA and DHA per day. <strong>Timing:</strong> With meals to aid absorption.</p>
+      <a class="brief-link" href="https://www.nutritionx.co.uk/daily-omega-3-fish-oil-tablets">nutritionx.co.uk — Daily Omega-3 Fish Oil</a>
+
+      <hr class="brief-rule">
+
+      <!-- Vitamin D -->
+      <div class="brief-h3">
+        Vitamin D
+        <span class="brief-tag brief-tag--active">In Use</span>
+      </div>
+      <p class="brief-body">Supports bone health, immune function, and overall health. Particularly relevant in the UK given limited sunlight from October to March. You are correctly reducing this as sunlight exposure increases — restart supplementation from around October. <strong>Dose:</strong> 2000–4000 IU/day (50–100 mcg). <strong>Timing:</strong> With a meal containing some fat to aid absorption.</p>
+      <a class="brief-link" href="https://www.nutritionx.co.uk/vitamin-d3-k2-tablets">nutritionx.co.uk — Vitamin D3 + K2</a>
+      <a class="brief-link" href="https://www.healthspanelite.co.uk/elite-vitamin-d3-4000iu/">healthspanelite.co.uk — Elite Vitamin D3 4000IU</a>
+
+      <hr class="brief-rule">
+
+      <!-- Tribulus -->
+      <div class="brief-h3">
+        Tribulus Terrestris
+        <span class="brief-tag brief-tag--warn">Discontinue</span>
+      </div>
+      <div class="brief-panel" style="margin-bottom:0;">
+        <div class="brief-panel__body">You mentioned using this as a testosterone booster and that you have noticed some benefit from it. It is worth being aware that the current research on tribulus is mixed — while some individuals report a positive response, controlled studies in trained, healthy men have not consistently demonstrated an effect on testosterone or performance beyond placebo. If you feel it is working for you, there is no known harm in continuing. That said, given the cost and the lack of strong supporting evidence, it may be worth trialling a period without it to see whether you notice any difference in how you feel or perform. This would give you a clearer personal picture of whether it is earning its place in your stack.</div>
+      </div>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>09</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE 10 — DISCOUNT CODES
+  ══════════════════════════════════════ -->
+  <div class="brief-page">
+    <div class="brief-page__inner">
+
+      <div class="brief-section">
+        <div class="brief-section__rule"></div>
+        <div class="brief-section__bar">
+          <span class="brief-section__num">07</span>
+          <span class="brief-section__title">Discount Codes</span>
+        </div>
+      </div>
+
+      <table class="brief-table">
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Code</th>
+            <th>Discount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="brief-table__key">Science in Sport (SIS)</td>
+            <td><span class="brief-table__code">SIS-MOD</span></td>
+            <td>30% off (full price products only)</td>
+          </tr>
+          <tr>
+            <td class="brief-table__key">NutritionX</td>
+            <td><span class="brief-table__code">NXCLUB</span></td>
+            <td>30% off</td>
+          </tr>
+          <tr>
+            <td class="brief-table__key">Healthspan Elite</td>
+            <td><span class="brief-table__code">MOD25</span></td>
+            <td>25% off</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="brief-spacer"></div>
+    </div>
+    <div class="brief-page__pagenum">
+      <span>Armour Performance Nutrition</span>
+      <span>A30122352 — 08.05.26</span>
+      <span>10</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
